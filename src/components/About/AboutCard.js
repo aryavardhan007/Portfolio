@@ -11,7 +11,7 @@ function AboutCard() {
             Hi Everyone, I am <span className="purple">Aryavardhan Singh </span>
             from <span className="purple"> Bhilwara, India.</span>
             <br />
-            I am currently employed as a software developer at Enrich Beauty.
+            I am currently employed as a Senior software developer at Enrich Beauty.
             <br />
             I have completed Btech in Electrical Engineering at IIT Jodhpur.
             <br />

@@ -20,7 +20,7 @@ function Home2() {
               LET ME <span className="purple"> INTRODUCE </span> MYSELF
             </h1>
             <p className="home-about-body">
-            I am Aryavardhan Singh, Backend-focused Software Engineer with three years of experience building scalable, reliable systems. Graduated from IIT Jodhpur, started out at Jio, now building at Enrich. Always exploring new tech, driven to solve real-world problems through code.
+            I am Aryavardhan Singh, Backend-focused Senior Software Engineer with three years of experience building scalable, reliable systems. Graduated from IIT Jodhpur, started out at Jio, now building at Enrich. Always exploring new tech, driven to solve real-world problems through code.
               <br />
               <br />I am fluent in languages like
               <i>
