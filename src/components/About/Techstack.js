@@ -4,7 +4,6 @@ import {
   DiNodejs,
   DiMongodb,
   DiGit,
-  DiJava,
 } from "react-icons/di";
 import {
   SiCplusplus,
@@ -14,7 +13,6 @@ import {
   SiTypescript,
   SiJavascript,
   SiFlutter,
-  SiSpringboot,
   SiGooglecloud,
   SiPython,
   SiFastapi,
