@@ -1,105 +1,119 @@
-import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import myImg from "../../Assets/avatar.svg";
-import Tilt from "react-parallax-tilt";
-import {
-  AiFillGithub,
-  AiOutlineTwitter,
-  AiFillInstagram,
-  AiOutlineMail,
-} from "react-icons/ai";
-import { FaLinkedinIn } from "react-icons/fa";
+import React, { useState } from "react";
+
+const yearsExp = new Date().getFullYear() - 2022;
+
+const experiences = [
+  {
+    company: "Avataar.ai",
+    role: "Software Development Engineer II",
+    period: "Jan 2026 — Present",
+    type: "current",
+    color: "#8b5cf6",
+    points: [
+      "Engineered Avataar Flows — a visual AI workflow automation platform (React 18 + FastAPI) with DAG-based parallel execution, achieving 89% accuracy at 33% of GPT-4o cost via pgvector semantic embeddings.",
+      "Built UAI — national-scale AI protocol control plane with 3 microservices (FastAPI + PostgreSQL + Elasticsearch + Redis), W3C DID v1.0, Ed25519 signature verification, and full DPDP Act 2023 compliance.",
+      "Developed Kisan-Vegh — a voice-first AI farming assistant with end-to-end Sarvam ASR → Dhenu VLM → LLM orchestration pipeline and real-time multi-agent observability dashboard.",
+    ],
+  },
+  {
+    company: "Enrich Beauty",
+    role: "Senior Software Engineer",
+    period: "Nov 2022 — Jan 2026",
+    type: "past",
+    color: "#ec4899",
+    points: [
+      "Architected Revenue Management System using Firebase Functions with multi-system BigQuery integration achieving 99%+ synchronization accuracy across invoices, credit notes, and orders.",
+      "Built end-to-end e-invoice/e-way bill solution (Webtel integration + Flutter dashboard) with 150+ validation fields, and a vendor management system with real-time BigQuery sync.",
+      "Developed Fortune Wheel Rewards System using weighted probability algorithms + Firestore transactions for concurrent request handling, and a Dynamic Retail App with 5+ Firebase Remote Config widget types.",
+    ],
+  },
+  {
+    company: "Reliance Jio",
+    role: "Software Development Engineer I",
+    period: "Jun 2022 — Nov 2022",
+    type: "past",
+    color: "#06b6d4",
+    points: [
+      "Added Redis Sentinels caching layer to the JioHealth WhatsApp-integration microservice, significantly improving response latency for bot users.",
+      "Introduced Azure ServiceBus Pub/Sub mechanism enabling multiple microservices to communicate asynchronously with the PME (Platform Message Engine).",
+    ],
+  },
+];
 
 function Home2() {
+  const [open, setOpen] = useState(0);
+
   return (
-    <Container fluid className="home-about-section" id="about">
-      <Container>
-        <Row>
-          <Col md={8} className="home-about-description">
-            <h1 style={{ fontSize: "2.6em" }}>
-              LET ME <span className="purple"> INTRODUCE </span> MYSELF
-            </h1>
-            <p className="home-about-body">
-            I am Aryavardhan Singh, Backend-focused Senior Software Engineer with three years of experience building scalable, reliable systems. Graduated from IIT Jodhpur, started out at Jio, now building at Enrich. Always exploring new tech, driven to solve real-world problems through code.
-              <br />
-              <br />I am fluent in languages like
-              <i>
-                <b className="purple"> TypeScript, Dart, Java, and C++. </b>
-              </i>
-              <br />
-              <br />
-              My field of Interest's are building new &nbsp;
-              <i>
-                <b className="purple">Mobile Applications, Full Stack Solutions and Backend Development</b> and
-                also in areas related to{" "}
-                <b className="purple">
-                  Cloud Technologies.
-                </b>
-              </i>
-              <br />
-              <br />
-              Whenever possible, I also apply my passion for developing products
-              with <b className="purple">Flutter</b> and
-              <i>
-                <b className="purple">
-                  {" "}
-                  Modern Backend Technologies
-                </b>
-              </i>
-              &nbsp; like
-              <i>
-                <b className="purple"> Node.js, Express.js, Java and Firebase</b>
-              </i>
-            </p>
-          </Col>
-          <Col md={4} className="myAvtar">
-            <Tilt>
-              <img src={myImg} className="img-fluid" alt="avatar" />
-            </Tilt>
-          </Col>
-        </Row>
-        <Row>
-          <Col md={12} className="home-about-social">
-            <h1>FIND ME ON</h1>
-            <p>
-              Feel free to <span className="purple">connect </span>with me
-            </p>
-            <ul className="home-about-social-links">
-              <li className="social-icons">
-                <a
-                  href="https://github.com/aryavardhan007"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="icon-colour  home-social-icons"
-                >
-                  <AiFillGithub />
-                </a>
-              </li>
-              <li className="social-icons">
-                <a
-                  href="https://www.linkedin.com/in/aryavardhan007/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="icon-colour  home-social-icons"
-                >
-                  <FaLinkedinIn />
-                </a>
-              </li>
-              <li className="social-icons">
-                <a
-                  href="mailto:aryavardhanshaktawat99@gmail.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="icon-colour home-social-icons"
-                >
-                  <AiOutlineMail />
-                </a>
-              </li>
-            </ul>
-          </Col>
-        </Row>
-      </Container>
-    </Container>
+    <section className="home-about-section">
+      <div className="section-container">
+        <div className="section-label">EXPERIENCE</div>
+        <h2 className="section-title">
+          Where I've <span className="gradient-text">worked</span>
+        </h2>
+        <p className="section-subtitle">
+          {yearsExp}+ years building production systems across AI, mobile, and backend engineering.
+        </p>
+
+        <div className="exp-list">
+          {experiences.map((exp, idx) => (
+            <div
+              key={exp.company}
+              className={`exp-item${open === idx ? " exp-item--open" : ""}`}
+            >
+              {/* Header row */}
+              <button
+                className="exp-header"
+                onClick={() => setOpen(open === idx ? -1 : idx)}
+                aria-expanded={open === idx}
+              >
+                <div className="exp-header-left">
+                  <span
+                    className="exp-dot"
+                    style={{ background: exp.color }}
+                  />
+                  <div>
+                    <span className="exp-company">{exp.company}</span>
+                    {exp.type === "current" && (
+                      <span className="exp-current-badge">Current</span>
+                    )}
+                    <span className="exp-role">{exp.role}</span>
+                  </div>
+                </div>
+                <div className="exp-header-right">
+                  <span className="exp-period">{exp.period}</span>
+                  <svg
+                    className={`exp-chevron${open === idx ? " exp-chevron--up" : ""}`}
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
+                </div>
+              </button>
+
+              {/* Expandable points */}
+              {open === idx && (
+                <ul className="exp-points">
+                  {exp.points.map((pt, i) => (
+                    <li key={i} className="exp-point">
+                      <span className="exp-point-dot" />
+                      {pt}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
+
 export default Home2;

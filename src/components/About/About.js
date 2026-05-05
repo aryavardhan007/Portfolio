@@ -1,53 +1,93 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import Particle from "../Particle";
-import Github from "./Github";
 import Techstack from "./Techstack";
-import Aboutcard from "./AboutCard";
-import laptopImg from "../../Assets/about.png";
-import Toolstack from "./Toolstack";
+
+const yearsExp = new Date().getFullYear() - 2022;
 
 function About() {
   return (
-    <Container fluid className="about-section">
-      <Particle />
-      <Container>
-        <Row style={{ justifyContent: "center", padding: "10px" }}>
-          <Col
-            md={7}
-            style={{
-              justifyContent: "center",
-              paddingTop: "30px",
-              paddingBottom: "50px",
-            }}
-          >
-            <h1 style={{ fontSize: "2.1em", paddingBottom: "20px" }}>
-              Know Who <strong className="purple">I'M</strong>
-            </h1>
-            <Aboutcard />
-          </Col>
-          <Col
-            md={5}
-            style={{ paddingTop: "120px", paddingBottom: "50px" }}
-            className="about-img"
-          >
-            <img src={laptopImg} alt="about" className="img-fluid" />
-          </Col>
-        </Row>
-        <h1 className="project-heading">
-          Professional <strong className="purple">Skillset </strong>
+    <div className="about-page">
+      {/* Header */}
+      <div className="about-hero">
+        <div className="section-label">ABOUT ME</div>
+        <h1 className="section-title">
+          The person behind the{" "}
+          <span className="gradient-text">code</span>
         </h1>
+        <p className="section-subtitle">
+          {yearsExp}+ years building systems across AI, mobile, and backend.
+          IIT Jodhpur grad, currently at Avataar.ai.
+        </p>
+      </div>
 
-        <Techstack />
+      {/* Bio grid */}
+      <div className="about-bio-grid">
+        <div className="about-bio-card">
+          <h3>Background</h3>
+          <div className="about-bio-text">
+            <p>
+              Hi, I'm <strong>Aryavardhan Singh</strong> from Bhilwara, India.
+              I completed my B.Tech in Electrical Engineering at{" "}
+              <strong>IIT Jodhpur</strong>.
+            </p>
+            <p>
+              I started my career at <strong>Reliance Jio</strong>, building
+              caching and messaging infrastructure for JioHealth. I then moved
+              to <strong>Enrich Beauty</strong> where I architected core
+              revenue, vendor, and operations systems. I'm now an{" "}
+              <strong>SDE-2 at Avataar.ai</strong>, helping build India's AI public infrastructure and spatial commerce experiences that push what's possible at the intersection of AI and the real world.
+            </p>
+          </div>
+        </div>
 
-        <h1 className="project-heading">
-          <strong className="purple">Tools</strong> I use
-        </h1>
-        <Toolstack />
+        <div className="about-bio-card">
+          <h3>Quick Info</h3>
+          <ul className="about-info-list">
+            <li className="about-info-item">
+              <span className="about-info-icon">🎓</span>
+              <span>
+                <strong style={{ display: "block", color: "var(--text)", fontWeight: 500 }}>
+                  IIT Jodhpur
+                </strong>
+                B.Tech — Electrical Engineering
+              </span>
+            </li>
+            <li className="about-info-item">
+              <span className="about-info-icon">🏢</span>
+              <span>
+                <strong style={{ display: "block", color: "var(--text)", fontWeight: 500 }}>
+                  Avataar.ai — SDE-2
+                </strong>
+                AI infrastructure, distributed systems, and spatial commerce
+              </span>
+            </li>
+            <li className="about-info-item">
+              <span className="about-info-icon">📍</span>
+              <span>Bangalore, India</span>
+            </li>
+            <li className="about-info-item">
+              <span className="about-info-icon">📴</span>
+              <div>
+                <span style={{ display: "block", marginBottom: "8px" }}>
+                  Outside of work:
+                </span>
+                <div className="about-hobbies">
+                  {["Football", "Cricket", "Photography", "Travelling"].map(
+                    (h) => (
+                      <span key={h} className="about-hobby-tag">
+                        {h}
+                      </span>
+                    )
+                  )}
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
 
-        {/* <Github /> */}
-      </Container>
-    </Container>
+      {/* Skills */}
+      <Techstack />
+    </div>
   );
 }
 

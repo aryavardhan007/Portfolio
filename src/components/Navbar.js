@@ -1,111 +1,110 @@
-import React, { useState } from "react";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import Container from "react-bootstrap/Container";
-import logo from "../Assets/logo.png";
-import Button from "react-bootstrap/Button";
-import { Link } from "react-router-dom";
-import { CgGitFork } from "react-icons/cg";
-import { ImBlog } from "react-icons/im";
-import {
-  AiFillStar,
-  AiOutlineHome,
-  AiOutlineFundProjectionScreen,
-  AiOutlineUser,
-} from "react-icons/ai";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import ThemeToggle from "./ThemeToggle";
 
-import { CgFileDocument } from "react-icons/cg";
+const navLinks = [
+  { label: "Home", path: "/" },
+  { label: "About", path: "/about" },
+  { label: "Projects", path: "/project" },
+  { label: "Resume", path: "/resume" },
+];
 
 function NavBar() {
-  const [expand, updateExpanded] = useState(false);
-  const [navColour, updateNavbar] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
 
-  function scrollHandler() {
-    if (window.scrollY >= 20) {
-      updateNavbar(true);
-    } else {
-      updateNavbar(false);
+  // Close mobile menu on route change or Escape
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    const onKey = (e) => e.key === "Escape" && setMenuOpen(false);
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, []);
+
+  const scrollToContact = (e) => {
+    if (location.pathname === "/") {
+      e.preventDefault();
+      document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
     }
-  }
-
-  window.addEventListener("scroll", scrollHandler);
+  };
 
   return (
-    <Navbar
-      expanded={expand}
-      fixed="top"
-      expand="md"
-      className={navColour ? "sticky" : "navbar"}
-    >
-      <Container>
-        <Navbar.Brand href="/" className="d-flex">
-          <img src={logo} className="img-fluid logo" alt="brand" />
-        </Navbar.Brand>
-        <Navbar.Toggle
-          aria-controls="responsive-navbar-nav"
-          onClick={() => {
-            updateExpanded(expand ? false : "expanded");
-          }}
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </Navbar.Toggle>
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="ms-auto" defaultActiveKey="#home">
-            <Nav.Item>
-              <Nav.Link as={Link} to="/" onClick={() => updateExpanded(false)}>
-                <AiOutlineHome style={{ marginBottom: "2px" }} /> Home
-              </Nav.Link>
-            </Nav.Item>
+    <>
+      <nav className="nav-main">
+        <div className="nav-inner">
+          {/* Logo */}
+          <Link to="/" className="nav-logo">
+            <div className="nav-logo-mark-wrap">
+              <span className="nav-logo-mark">AS</span>
+            </div>
+            <span>Aryavardhan Singh</span>
+          </Link>
 
-            <Nav.Item>
-              <Nav.Link
-                as={Link}
-                to="/about"
-                onClick={() => updateExpanded(false)}
-              >
-                <AiOutlineUser style={{ marginBottom: "2px" }} /> About
-              </Nav.Link>
-            </Nav.Item>
+          {/* Desktop nav links — only visible on md+ screens */}
+          <ul className="nav-links-desktop">
+            {navLinks.map((link) => (
+              <li key={link.path}>
+                <Link
+                  to={link.path}
+                  className={location.pathname === link.path ? "active" : ""}
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
 
-            <Nav.Item>
-              <Nav.Link
-                as={Link}
-                to="/project"
-                onClick={() => updateExpanded(false)}
-              >
-                <AiOutlineFundProjectionScreen
-                  style={{ marginBottom: "2px" }}
-                />{" "}
-                Projects
-              </Nav.Link>
-            </Nav.Item>
+          {/* Right actions */}
+          <div className="nav-actions">
+            <ThemeToggle />
+            <Link
+              to="/"
+              onClick={scrollToContact}
+              className="btn-nav-cta"
+            >
+              Book a Call
+            </Link>
+            <button
+              className="nav-hamburger"
+              onClick={() => setMenuOpen((o) => !o)}
+              aria-label="Toggle menu"
+              aria-expanded={menuOpen}
+            >
+              <span style={{ transform: menuOpen ? "rotate(45deg) translate(5px, 5px)" : "none" }} />
+              <span style={{ opacity: menuOpen ? 0 : 1 }} />
+              <span style={{ transform: menuOpen ? "rotate(-45deg) translate(5px, -5px)" : "none" }} />
+            </button>
+          </div>
+        </div>
+      </nav>
 
-            <Nav.Item>
-              <Nav.Link
-                as={Link}
-                to="/resume"
-                onClick={() => updateExpanded(false)}
-              >
-                <CgFileDocument style={{ marginBottom: "2px" }} /> Resume
-              </Nav.Link>
-            </Nav.Item>
-
-            <Nav.Item className="fork-btn">
-              <Button
-                href="https://github.com/aryavardhan007/Portfolio"
-                target="_blank"
-                className="fork-btn-inner"
-              >
-                <CgGitFork style={{ fontSize: "1.2em" }} />{" "}
-                <AiFillStar style={{ fontSize: "1.1em" }} />
-              </Button>
-            </Nav.Item>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+      {/* Mobile drawer — completely outside the nav element so it's not a flex sibling */}
+      {menuOpen && (
+        <div className="nav-mobile-drawer">
+          {navLinks.map((link) => (
+            <Link
+              key={link.path}
+              to={link.path}
+              className={`nav-mobile-link${location.pathname === link.path ? " active" : ""}`}
+              onClick={() => setMenuOpen(false)}
+            >
+              {link.label}
+            </Link>
+          ))}
+          <Link
+            to="/"
+            className="btn-nav-cta"
+            style={{ marginTop: "8px", display: "inline-flex", width: "fit-content" }}
+            onClick={(e) => { setMenuOpen(false); scrollToContact(e); }}
+          >
+            Book a Call
+          </Link>
+        </div>
+      )}
+    </>
   );
 }
 

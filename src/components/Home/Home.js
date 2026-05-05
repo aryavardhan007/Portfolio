@@ -1,47 +1,81 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import homeLogo from "../../Assets/home-main.svg";
-import Particle from "../Particle";
 import Home2 from "./Home2";
-import Type from "./Type";
+import CalendlySection from "../CalendlySection";
+import AvatarFace from "../AvatarFace";
+import { Link } from "react-router-dom";
+
+const yearsExp = new Date().getFullYear() - 2022;
 
 function Home() {
   return (
     <section>
-      <Container fluid className="home-section" id="home">
-        <Particle />
-        <Container className="home-content">
-          <Row>
-            <Col md={7} className="home-header">
-              <h1 style={{ paddingBottom: 15 }} className="heading">
-                Hi There!{" "}
-                <span className="wave" role="img" aria-labelledby="wave">
-                  👋🏻
-                </span>
-              </h1>
+      {/* Hero */}
+      <div className="hero-section">
+        <div className="hero-inner">
 
-              <h1 className="heading-name">
-                I'M
-                <strong className="main-name"> ARYAVARDHAN SINGH SHAKTAWAT</strong>
-              </h1>
+          <h1 className="hero-title">
+            Hi, I'm{" "}
+            <span className="gradient-text">Aryavardhan</span>
+          </h1>
 
-              <div style={{ padding: 50, textAlign: "left" }}>
-                <Type />
-              </div>
-            </Col>
+          <AvatarFace />
 
-            <Col md={5} style={{ paddingBottom: 20 }}>
-              <img
-                src={homeLogo}
-                alt="home pic"
-                className="img-fluid"
-                style={{ maxHeight: "450px" }}
-              />
-            </Col>
-          </Row>
-        </Container>
-      </Container>
+          <div className="hero-typewriter">
+            <span className="gradient-text" style={{ fontWeight: 500 }}>
+              Backend Engineer &nbsp;·&nbsp; Distributed Infra &nbsp;·&nbsp; AI Systems &nbsp;·&nbsp; Mobile &amp; Full‑Stack
+            </span>
+          </div>
+
+          <p className="hero-subtitle">
+            Building AI‑powered platforms, distributed backends, and
+            spatial commerce experiences. Currently engineering at{" "}
+            <strong>Avataar.ai</strong> — helping build India's AI public infrastructure.
+          </p>
+
+          <div className="hero-actions">
+            <Link to="/project" className="btn-primary-hero">
+              View Projects
+            </Link>
+            <a
+              href="#contact"
+              className="btn-ghost-hero"
+              onClick={(e) => {
+                e.preventDefault();
+                document
+                  .getElementById("contact")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              Book a Call
+            </a>
+          </div>
+
+          <div className="hero-divider" />
+
+          <div className="hero-stats">
+            <div className="hero-stat">
+              <div className="hero-stat-value">{yearsExp}+</div>
+              <div className="hero-stat-label">Years Experience</div>
+            </div>
+            <div className="hero-stat-divider" />
+            <div className="hero-stat">
+              <div className="hero-stat-value">12+</div>
+              <div className="hero-stat-label">Projects Shipped</div>
+            </div>
+            <div className="hero-stat-divider" />
+            <div className="hero-stat">
+              <div className="hero-stat-value">IIT</div>
+              <div className="hero-stat-label">Jodhpur Graduate</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* About intro */}
       <Home2 />
+
+      {/* Calendly booking */}
+      <CalendlySection />
     </section>
   );
 }

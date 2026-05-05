@@ -1,61 +1,46 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import {
-  AiFillGithub,
-  AiOutlineTwitter,
-  AiFillInstagram,
-  AiOutlineMail,
-} from "react-icons/ai";
+import { AiFillGithub, AiOutlineMail } from "react-icons/ai";
 import { FaLinkedinIn } from "react-icons/fa";
 
 function Footer() {
-  let date = new Date();
-  let year = date.getFullYear();
+  const year = new Date().getFullYear();
+
   return (
-    <Container fluid className="footer">
-      <Row>
-        <Col md="4" className="footer-copywright">
-          <h3>Developed by Aryavardhan Singh</h3>
-        </Col>
-        <Col md="4" className="footer-copywright">
-          <h3>Copyright © {year} AVS</h3>
-        </Col>
-        <Col md="4" className="footer-body">
-          <ul className="footer-icons">
-            <li className="social-icons">
-              <a
-                href="https://github.com/aryavardhan007"
-                style={{ color: "white" }}
-                target="_blank" 
-                rel="noopener noreferrer"
-              >
-                <AiFillGithub />
-              </a>
-            </li>
-            <li className="social-icons">
-              <a
-                href="https://www.linkedin.com/in/aryavardhan007/"
-                style={{ color: "white" }}
-                target="_blank" 
-                rel="noopener noreferrer"
-              >
-                <FaLinkedinIn />
-              </a>
-            </li>
-            <li className="social-icons">
-              <a
-                href="mailto:aryavardhanshaktawat99@gmail.com"
-                style={{ color: "white" }}
-                target="_blank" 
-                rel="noopener noreferrer"
-              >
-                <AiOutlineMail />
-              </a>
-            </li>
-          </ul>
-        </Col>
-      </Row>
-    </Container>
+    <footer className="footer-main">
+      <div className="footer-inner">
+        <p className="footer-copy">
+          © {year} <span>Aryavardhan Singh Shaktawat</span>. Built with React.
+        </p>
+
+        <div className="footer-social">
+          <a
+            href="https://github.com/aryavardhan007"
+            target="_blank"
+            rel="noreferrer"
+            className="footer-social-link"
+            title="GitHub"
+          >
+            <AiFillGithub />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/aryavardhan007/"
+            target="_blank"
+            rel="noreferrer"
+            className="footer-social-link"
+            title="LinkedIn"
+          >
+            <FaLinkedinIn />
+          </a>
+          <a
+            href="mailto:aryavardhanshaktawat99@gmail.com"
+            className="footer-social-link"
+            title="Email"
+          >
+            <AiOutlineMail />
+          </a>
+        </div>
+      </div>
+    </footer>
   );
 }
 
